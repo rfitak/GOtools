@@ -18,6 +18,8 @@ GOEnrich_customTable(
 
 \item{tableFile}{path of the custom GO annotation file, which annotates two-column pairwise gene-GO per row}
 
+\item{nodeSize}{prune the GO hierarchy from the terms which have less than nodeSize annotated genes}
+
 \item{useFDR}{whether to use FDR}
 
 \item{cut}{significant pvalue threshold, if useFDR is set, use FDR instead}
