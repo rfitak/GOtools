@@ -17,6 +17,7 @@
 ```
 install.packages('devtools')
 devtools::install_github('rfitak/GONGSTools_bob')
+library(PlantNGSTools)
 ```
 
 
