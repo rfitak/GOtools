@@ -1,7 +1,7 @@
 Package: GOtools
 Type: Package
 Title: RNA-seq and GO bioinformatics tools
-Version: 0.4.6
+Version: 0.4.7
 Author: Marble and Rfitak
 Maintainer: Rfitak <rfitak9@gmail.com>
 Description: RNA-seq and GO bioinformatics tools
