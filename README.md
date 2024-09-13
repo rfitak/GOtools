@@ -1,4 +1,4 @@
-# PlantNGSTools - Plant RNA-seq analysis tool
+# GONGSTools_bob - RNA-seq and GO analysis tool
 
 
 **Latest version:** [![Latest Version](https://img.shields.io/github/release/biomarble/PlantNGSTools.svg?style=flat?maxAge=86400)](https://github.com/biomarble/PlantNGSTools/releases)
@@ -16,7 +16,7 @@
 
 ```
 install.packages('devtools')
-devtools::install_github('biomarble/PlantNGSTools')
+devtools::install_github('rfitak/GONGSTools_bob')
 ```
 
 
