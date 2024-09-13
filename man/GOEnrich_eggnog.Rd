@@ -18,6 +18,8 @@ GOEnrich_eggnog(
 
 \item{eggnogFile}{custom annotation file using eggNOG database}
 
+\item{nodeSize}{prune the GO hierarchy from the terms which have less than nodeSize annotated genes}
+
 \item{useFDR}{whether to use FDR}
 
 \item{cut}{significant pvalue threshold, if useFDR is set, use FDR instead}
