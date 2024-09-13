@@ -17,7 +17,7 @@
 ```
 install.packages('devtools')
 devtools::install_github('rfitak/GOtools')
-library(PlantNGSTools)
+library(GOtools)
 ```
 
 
