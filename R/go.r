@@ -12,6 +12,7 @@
 #' @export
 GOEnrich <- function(deglist,
                     taxon,
+                    nodeSize = 1,
                     useFDR = FALSE,
                     cut = 0.05,
                     outdir = NULL,
@@ -21,7 +22,7 @@ GOEnrich <- function(deglist,
     geneID2GO <- godb[[taxon]][['db']]
     version <- godb[[taxon]][['version']]
     cat('genome version:', version, '\n')
-    res <- GOenrich_common(deglist, geneID2GO, useFDR = useFDR, cut = cut, outdir = outdir, outprefix = outprefix)
+    res <- GOenrich_common(deglist, geneID2GO, nodeSize, useFDR = useFDR, cut = cut, outdir = outdir, outprefix = outprefix)
     return(res)
 }
 
@@ -45,6 +46,7 @@ GOEnrich <- function(deglist,
 #'
 GOEnrich_eggnog <- function(deglist,
                            eggnogFile,
+                           nodeSize = 1,
                            useFDR = FALSE,
                            cut = 0.05,
                            outdir = NULL,
@@ -62,6 +64,7 @@ GOEnrich_eggnog <- function(deglist,
     res <- GOenrich_common(
         deglist,
         geneID2GO,
+        nodeSize,
         useFDR = useFDR,
         cut=cut,
         outdir = outdir,
@@ -84,6 +87,7 @@ GOEnrich_eggnog <- function(deglist,
 #' @export
 GOEnrich_pannzer2 <- function(deglist,
                     pannzerfile,
+                    nodeSize = 1,
                     useFDR = FALSE,
                     cut = 0.05,
                     outdir = NULL,
@@ -91,6 +95,7 @@ GOEnrich_pannzer2 <- function(deglist,
     geneID2GO <- PANNZERres2GOdb(pannzerfile)
     res <- GOenrich_common(deglist,
                         geneID2GO,
+                        nodeSize,
                         useFDR = useFDR,
                         cut = cut,
                         outdir = outdir,
@@ -112,6 +117,7 @@ GOEnrich_pannzer2 <- function(deglist,
 #' @export
 GOEnrich_customTable <- function(deglist,
                            tableFile,
+                           nodeSize = 1,
                            useFDR = FALSE,
                            cut = 0.05,
                            outdir = NULL,
@@ -124,6 +130,7 @@ GOEnrich_customTable <- function(deglist,
 
     res <- GOenrich_common(deglist,
                         geneID2GO,
+                        nodeSize,
                         useFDR = useFDR,
                         cut = cut,
                         outdir = outdir,
@@ -145,6 +152,7 @@ GOEnrich_customTable <- function(deglist,
 #' @export
 GOEnrich_customMapping <- function(deglist,
                            mappingfile,
+                           nodeSize = 1,
                            useFDR = FALSE,
                            cut = 0.05,
                            outdir = NULL,
@@ -152,6 +160,7 @@ GOEnrich_customMapping <- function(deglist,
     geneID2GO <- readMappings(file = mappingfile)
     res <- GOenrich_common(deglist,
                         geneID2GO,
+                        nodeSize,
                         useFDR = useFDR,
                         cut = cut,
                         outdir = outdir,
@@ -165,7 +174,7 @@ GOEnrich_customMapping <- function(deglist,
 #' @import GO.db
 #' @importFrom  dplyr select
 #' @import topGO
-GOenrichsub <- function(deglist, geneID2GO, class, output) {
+GOenrichsub <- function(deglist, geneID2GO, nodeSize, class, output) {
     cat('Processing', class, 'class...')
     geneList <- rep(1, length(geneID2GO))
     names(geneList) <- names(geneID2GO)
@@ -174,7 +183,7 @@ GOenrichsub <- function(deglist, geneID2GO, class, output) {
         suppressMessages(
             new(
                 "topGOdata",
-                nodeSize = 1,
+                nodeSize = nodeSize,
                 ontology = class,
                 allGenes = geneList,
                 annot = annFUN.gene2GO,
@@ -240,6 +249,7 @@ PANNZERres2GOdb <- function(PANNZERfile){
 #' @import topGO
 GOenrich_common <- function(deglist,
                            geneID2GO,
+                           nodeSize = 1,
                            useFDR = FALSE,
                            cut = 0.05,
                            outdir = NULL,
@@ -252,14 +262,17 @@ GOenrich_common <- function(deglist,
     }
     BP.res <- GOenrichsub(deglist,
                          geneID2GO,
+                         nodeSize,
                          'BP',
                          paste0(outdir, '/', outprefix))
     MF.res <- GOenrichsub(deglist,
                          geneID2GO,
+                         nodeSize,
                          'MF',
                          paste0(outdir, '/', outprefix))
     CC.res <- GOenrichsub(deglist,
                          geneID2GO,
+                         nodeSize,
                          'CC',
                          paste0(outdir, '/', outprefix))
 
