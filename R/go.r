@@ -10,18 +10,18 @@
 #' @title GO enrichment .
 #' @description  do GO enrichment by a list of DEGs.
 #' @export
-GOEnrich = function(deglist,
+GOEnrich <- function(deglist,
                     taxon,
                     useFDR = FALSE,
-                    cut=0.05,
+                    cut = 0.05,
                     outdir = NULL,
                     outprefix) {
     checkParams(taxon, names(godb), 'taxon')
 
-    geneID2GO = godb[[taxon]][['db']]
-    version = godb[[taxon]][['version']]
+    geneID2GO <- godb[[taxon]][['db']]
+    version <- godb[[taxon]][['version']]
     cat('genome version:', version, '\n')
-    res=GOenrich_common(deglist,geneID2GO,useFDR=useFDR,cut=cut,outdir=outdir,outprefix=outprefix)
+    res <- GOenrich_common(deglist, geneID2GO, useFDR = useFDR, cut = cut, outdir = outdir, outprefix = outprefix)
     return(res)
 }
 
@@ -43,23 +43,23 @@ GOEnrich = function(deglist,
 #' @importFrom dplyr select
 #' @export
 #'
-GOEnrich_eggnog = function(deglist,
+GOEnrich_eggnog <- function(deglist,
                            eggnogFile,
                            useFDR = FALSE,
-                           cut=0.05,
+                           cut = 0.05,
                            outdir = NULL,
                            outprefix = NULL) {
-    data = read_delim(
+    data <- read_delim(
         eggnogFile,
         comment = '##',
         delim = "\t",
         na = '-',
         col_names = T,
-        col_types =cols(.default = col_character()))%>%
+        col_types = cols(.default = col_character()))%>%
        dplyr::select(c('#query', 'GOs'))%>% na.omit()
     geneID2GO <- strsplit(data$GOs, ",")
-    names(geneID2GO) = data$`#query`
-    res = GOenrich_common(
+    names(geneID2GO) <- data$`#query`
+    res <- GOenrich_common(
         deglist,
         geneID2GO,
         useFDR = useFDR,
@@ -82,17 +82,19 @@ GOEnrich_eggnog = function(deglist,
 #' @title GO enrichment using pannzer2 result.
 #' @description  do GO enrichment by a list of DEGs using pannzer2 result.
 #' @export
-GOEnrich_pannzer2 = function(deglist,
+GOEnrich_pannzer2 <- function(deglist,
                     pannzerfile,
                     useFDR = FALSE,
-                    cut=0.05,
+                    cut = 0.05,
                     outdir = NULL,
                     outprefix=NULL) {
-    geneID2GO = PANNZERres2GOdb(pannzerfile)
-    res=GOenrich_common(deglist,geneID2GO,
+    geneID2GO <- PANNZERres2GOdb(pannzerfile)
+    res <- GOenrich_common(deglist,
+                        geneID2GO,
                         useFDR = useFDR,
-                        cut=cut,
-                        outdir=outdir,outprefix=outprefix)
+                        cut = cut,
+                        outdir = outdir,
+                        outprefix = outprefix)
     return(res)
 }
 
@@ -108,24 +110,27 @@ GOEnrich_pannzer2 = function(deglist,
 #' @title GO enrichment using custom table  annotation.
 #' @description  do GO enrichment by a list of DEGs using custom table annotation.
 #' @export
-GOEnrich_customTable = function(deglist,
+GOEnrich_customTable <- function(deglist,
                            tableFile,
                            useFDR = FALSE,
-                           cut=0.05,
+                           cut = 0.05,
                            outdir = NULL,
-                           outprefix=NULL) {
-    geneID2GOtable=read.delim(tableFile,header=T,sep="\t")
-    checkParams(colnames(geneID2GOtable),c('GeneID','GOID'),string = "geneID2GOtable列名错误")
+                           outprefix = NULL) {
+    geneID2GOtable <- read.delim(tableFile, header = T, sep = "\t")
+    checkParams(colnames(geneID2GOtable), c('GeneID', 'GOID'), string = "geneID2GOtable列名错误")
 
-    geneID2GO=lapply(unique(geneID2GOtable$GeneID), function (x) geneID2GOtable$GOID[geneID2GOtable$GeneID==x])
-    names(geneID2GO)=unique(geneID2GOtable$GeneID)
+    geneID2GO <- lapply(unique(geneID2GOtable$GeneID), function (x) geneID2GOtable$GOID[geneID2GOtable$GeneID == x])
+    names(geneID2GO) <- unique(geneID2GOtable$GeneID)
 
-    res=GOenrich_common(deglist,geneID2GO,
+    res <- GOenrich_common(deglist,
+                        geneID2GO,
                         useFDR = useFDR,
-                        cut=cut,
-                        outdir=outdir,outprefix=outprefix)
+                        cut = cut,
+                        outdir = outdir,
+                        outprefix = outprefix)
     return(res)
 }
+                        
 #' @param deglist  DEG vector
 #'
 #' @param outdir output directory
@@ -138,17 +143,19 @@ GOEnrich_customTable = function(deglist,
 #' @description  do GO enrichment by a list of DEGs using custom mapping  file.
 #' @importFrom topGO readMappings
 #' @export
-GOEnrich_customMapping = function(deglist,
+GOEnrich_customMapping <- function(deglist,
                            mappingfile,
                            useFDR = FALSE,
-                           cut=0.05,
+                           cut = 0.05,
                            outdir = NULL,
-                           outprefix=NULL) {
-    geneID2GO<-readMappings(file=mappingfile)
-    res=GOenrich_common(deglist,geneID2GO,
+                           outprefix = NULL) {
+    geneID2GO <- readMappings(file = mappingfile)
+    res <- GOenrich_common(deglist,
+                        geneID2GO,
                         useFDR = useFDR,
-                        cut=cut,
-                        outdir=outdir,outprefix=outprefix)
+                        cut = cut,
+                        outdir = outdir,
+                        outprefix = outprefix)
     return(res)
 }
 
@@ -197,15 +204,15 @@ GOenrichsub <- function(deglist, geneID2GO, class, output) {
     gene = NULL
     GOs = sampleGOdata@graph@nodeData@data
     for (i in allRes$GO.ID) {
-        e = paste0('g=names(GOs$`', i, '`$genes)')
+        e <- paste0('g=names(GOs$`', i, '`$genes)')
         eval(parse(text = e))
 
-        d = intersect(g, deglist)
-        e = paste0('gene[\'', i, '\']=toString(d)')
+        d <- intersect(g, deglist)
+        e <- paste0('gene[\'', i, '\']=toString(d)')
         eval(parse(text = e))
     }
-    allRes$gene = gene
-    allRes = cbind(allRes,
+    allRes$gene <- gene
+    allRes <- cbind(allRes,
                    AllDEG = length(geneList[geneList == 0]),
                    Class = class)
     cat('done!\n')
@@ -215,11 +222,11 @@ GOenrichsub <- function(deglist, geneID2GO, class, output) {
 #' @title convert PANNZER GO annotation to godb addon.
 #' @description  convert PANNZER GO annotation(GO.out file) to geneID2GO format.
 #' @importFrom magrittr %>%
-PANNZERres2GOdb=function(PANNZERfile){
-    dat=read.delim(PANNZERfile,header=T,sep="\t",)
-    GOcontent=as.data.frame(cbind(GID=dat$qpid,GOID=paste0('GO:', sprintf("%07d", dat$goid))))
-    geneID2GO=lapply(unique(GOcontent$GID), function (x) GOcontent$GOID[GOcontent$GID==x])
-    names(geneID2GO)=unique(GOcontent$GID)
+PANNZERres2GOdb <- function(PANNZERfile){
+    dat <- read.delim(PANNZERfile, header = T, sep = "\t")
+    GOcontent <- as.data.frame(cbind(GID = dat$qpid, GOID = paste0('GO:', sprintf("%07d", dat$goid))))
+    geneID2GO <- lapply(unique(GOcontent$GID), function (x) GOcontent$GOID[GOcontent$GID == x])
+    names(geneID2GO) <- unique(GOcontent$GID)
     return(geneID2GO)
 }
 
@@ -231,35 +238,35 @@ PANNZERres2GOdb=function(PANNZERfile){
 #' @importFrom  dplyr group_by
 #' @importFrom  dplyr mutate
 #' @import topGO
-GOenrich_common = function(deglist,
+GOenrich_common <- function(deglist,
                            geneID2GO,
                            useFDR = FALSE,
-                           cut=0.05,
+                           cut = 0.05,
                            outdir = NULL,
-                           outprefix=NULL) {
+                           outprefix = NULL) {
     if (is.null(outdir)) {
-        outdir = getwd()
+        outdir <- getwd()
     }
     if (!dir.exists(outdir)) {
         dir.create(outdir)
     }
-    BP.res = GOenrichsub(deglist,
+    BP.res <- GOenrichsub(deglist,
                          geneID2GO,
                          'BP',
                          paste0(outdir, '/', outprefix))
-    MF.res = GOenrichsub(deglist,
+    MF.res <- GOenrichsub(deglist,
                          geneID2GO,
                          'MF',
                          paste0(outdir, '/', outprefix))
-    CC.res = GOenrichsub(deglist,
+    CC.res <- GOenrichsub(deglist,
                          geneID2GO,
                          'CC',
                          paste0(outdir, '/', outprefix))
 
     all = rbind(BP.res, MF.res, CC.res)
-    all[all$Pvalue=='< 1e-30','Pvalue']=1e-31
-    all$Pvalue = as.numeric(all$Pvalue)
-    all = all %>% select(
+    all[all$Pvalue == '< 1e-30','Pvalue'] = 1e-31
+    all$Pvalue <- as.numeric(all$Pvalue)
+    all <- all %>% select(
         c(
             'GO.ID',
             'Term',
@@ -271,13 +278,13 @@ GOenrich_common = function(deglist,
             'gene'
         )
     )
-    all=all[!is.na(all$Pvalue),]
+    all <- all[!is.na(all$Pvalue),]
 
     if(useFDR){
-        all=all%>%dplyr::group_by(Class)%>%dplyr::mutate(FDR=p.adjust(Pvalue,method='BH'))
-        sigres=all[all$FDR < cut,]
+        all <- all%>%dplyr::group_by(Class)%>%dplyr::mutate(FDR = p.adjust(Pvalue, method = 'BH'))
+        sigres <- all[all$FDR < cut,]
     }else{
-        sigres=all[all$Pvalue < cut,]
+        sigres <- all[all$Pvalue < cut,]
     }
     write.table(
         sigres,
