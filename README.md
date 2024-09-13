@@ -40,7 +40,7 @@ library(PlantNGSTools)
 |DEG MA Plot|MAPlot|[ggplot2](https://ggplot2.tidyverse.org/)|
 |Bubble plot for KEGG enrichment|KEGGbubble|[ggplot2](https://ggplot2.tidyverse.org/)|
 |Bubble plot for GO enrichment|GObubble|[ggplot2](https://ggplot2.tidyverse.org/)<br>|
-|Bar plot for secondary GO Terms|GOBar|[ggplot2](https://ggplot2.tidyverse.org/)<br>|
+|Bar plot for secondary GO Terms[^1]|GOBar|[ggplot2](https://ggplot2.tidyverse.org/)<br>|
 |Trait statistics[^2]|multiTraitStat|-|
 |Trait plot[^3]| multiTraitPlot|-|
 |Expression matrix combining|matrixGroup|-|
