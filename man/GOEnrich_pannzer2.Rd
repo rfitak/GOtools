@@ -14,9 +14,9 @@ GOEnrich_pannzer2(
 )
 }
 \arguments{
-\item{deglist}{DEG vector}
+\item{deglist}{character vector of differentially expressed genes}
 
-\item{pannzerfile}{custom annotation file using pannzer2 database}
+\item{pannzerfile}{GO.txt annotation file using pannzer2 database}
 
 \item{useFDR}{whether to use FDR}
 
@@ -27,5 +27,5 @@ GOEnrich_pannzer2(
 \item{outprefix}{output file prefix}
 }
 \description{
-do GO enrichment by a list of DEGs using pannzer2 result.
+do GO enrichment by a list of DEGs using pannzer2 annotation output.
 }
