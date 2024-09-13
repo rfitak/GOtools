@@ -7,6 +7,7 @@
 GOEnrich_customTable(
   deglist,
   tableFile,
+  nodeSize = 1,
   useFDR = FALSE,
   cut = 0.05,
   outdir = NULL,
