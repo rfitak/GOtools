@@ -1,9 +1,10 @@
 
-#' @param deglist  DEG vector
+#' @param deglist  character vector of gene IDs
 #'
 #' @param taxon  taxon id , use GOdbInfo() to check available ids
 #' @param outdir output directory
 #' @param outprefix output file prefix
+#' @param nodeSize  prune the GO hierarchy from the terms which have less than nodeSize annotated genes
 #' @param useFDR  whether to use FDR
 #' @param cut  significant pvalue threshold, if useFDR is set, use FDR instead
 #'
@@ -27,10 +28,11 @@ GOEnrich <- function(deglist,
 }
 
 
-#' @param deglist  DEG vector
+#' @param deglist  character vector of gene IDs
 #'
 #' @param outdir output directory
 #' @param outprefix output file prefix
+#' @param nodeSize  prune the GO hierarchy from the terms which have less than nodeSize annotated genes
 #' @param useFDR  whether to use FDR
 #' @param cut  significant pvalue threshold, if useFDR is set, use FDR instead
 #' @param eggnogFile  custom annotation file using eggNOG database
@@ -74,10 +76,11 @@ GOEnrich_eggnog <- function(deglist,
 }
 
 
-#' @param deglist  DEG vector
+#' @param deglist  character vector of gene IDs
 #'
 #' @param outdir output directory
 #' @param outprefix output file prefix
+#' @param nodeSize  prune the GO hierarchy from the terms which have less than nodeSize annotated genes
 #' @param useFDR  whether to use FDR
 #' @param cut  significant pvalue threshold, if useFDR is set, use FDR instead
 #' @param pannzerfile  custom annotation file using pannzer2 database
@@ -104,10 +107,11 @@ GOEnrich_pannzer2 <- function(deglist,
 }
 
 
-#' @param deglist  DEG vector
+#' @param deglist  character vector of gene IDs
 #'
 #' @param outdir output directory
 #' @param outprefix output file prefix
+#' @param nodeSize  prune the GO hierarchy from the terms which have less than nodeSize annotated genes
 #' @param useFDR  whether to use FDR
 #' @param cut  significant pvalue threshold, if useFDR is set, use FDR instead
 #' @param tableFile path of the custom GO annotation file, which annotates two-column pairwise gene-GO per row
@@ -138,10 +142,11 @@ GOEnrich_customTable <- function(deglist,
     return(res)
 }
                         
-#' @param deglist  DEG vector
+#' @param deglist  character vector of gene IDs
 #'
 #' @param outdir output directory
 #' @param outprefix output file prefix
+#' @param nodeSize  prune the GO hierarchy from the terms which have less than nodeSize annotated genes
 #' @param useFDR  whether to use FDR
 #' @param cut  significant pvalue threshold, if useFDR is set, use FDR instead
 #' @param mappingfile path of the custom GO annotation file, which annotates each gene in a row, separate GOs with comma(,)
@@ -229,7 +234,7 @@ GOenrichsub <- function(deglist, geneID2GO, nodeSize, class, output) {
 }
 
 #' @title convert PANNZER GO annotation to godb addon.
-#' @description  convert PANNZER GO annotation(GO.out file) to geneID2GO format.
+#' @description  convert PANNZER GO annotation (GO.out file) to geneID2GO format.
 #' @importFrom magrittr %>%
 PANNZERres2GOdb <- function(PANNZERfile){
     dat <- read.delim(PANNZERfile, header = T, sep = "\t")
