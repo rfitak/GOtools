@@ -4,7 +4,7 @@
 \alias{GOEnrich}
 \title{GO enrichment .}
 \usage{
-GOEnrich(deglist, taxon, useFDR = FALSE, cut = 0.05, outdir = NULL, outprefix)
+GOEnrich(deglist, taxon, nodeSize = 1, useFDR = FALSE, cut = 0.05, outdir = NULL, outprefix)
 }
 \arguments{
 \item{deglist}{DEG vector}
