@@ -7,5 +7,5 @@
 PANNZERres2GOdb(PANNZERfile)
 }
 \description{
-convert PANNZER GO annotation(GO.out file) to geneID2GO format. This is the "GO.txt" file from PANNZER2
+convert PANNZER GO annotation (GO.out file) to geneID2GO format. This is the "GO.txt" file from PANNZER2
 }
