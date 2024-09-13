@@ -45,6 +45,7 @@ library(PlantNGSTools)
 |Trait plot[^3]| multiTraitPlot|-|
 |Expression matrix combining|matrixGroup|-|
 
+
 [^1]: The secondary nodes of GO are the direct child nodes of the three main nodes of MF, BP and CC.
 [^2]: Maximum/minimum value, mean, median, skewness, kurtosis, shannon polymorphism index, coefficient of variation
 [^3]: Histogram, correlation scatter plot, correlation significance, correlation coefficient
