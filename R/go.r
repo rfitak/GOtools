@@ -217,7 +217,7 @@ GOenrichsub <- function(deglist, geneID2GO, class, output) {
 #' @importFrom magrittr %>%
 PANNZERres2GOdb=function(PANNZERfile){
     dat=read.delim(PANNZERfile,header=T,sep="\t",)
-    GOcontent=cbind(GID=dat$qpid,GOID=paste0('GO:', sprintf("%07d", dat$goid)))%>%as.data.frame()
+    GOcontent=as.data.frame(cbind(GID=dat$qpid,GOID=paste0('GO:', sprintf("%07d", dat$goid))))
     geneID2GO=lapply(unique(GOcontent$GID), function (x) GOcontent$GOID[GOcontent$GID==x])
     names(geneID2GO)=unique(GOcontent$GID)
     return(geneID2GO)
