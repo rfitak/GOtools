@@ -150,17 +150,17 @@ DEGAnalysis_DESeq2 <-
 
         while (!(control %in% allgroups)) {
             print(group)
-            cat('可用分组名称：', paste(allgroups), '\n')
-            control <- readline(prompt = "输入对照组名称: ")
+            cat('Groups：', paste(allgroups), '\n')
+            control <- readline(prompt = "Enter control group name: ")
         }
         allgroups = allgroups[!(allgroups %in% control)]
         if (length(allgroups) == 1) {
             treat = allgroups[1]
-            cat('实验组名称（自动选择）：', treat, '\n')
+            cat('Experimental group name（Automatic）：', treat, '\n')
         } else{
             while (!(treat %in% allgroups)) {
-                cat('可用分组名称：', paste(allgroups), '\n')
-                treat <- readline(prompt = "输入实验组名称: ")
+                cat('Available Group Names：', paste(allgroups), '\n')
+                treat <- readline(prompt = "Enter the name of the experiment group: ")
             }
         }
         meta.data = group %>% filter(group %in% c(control, treat))
@@ -210,7 +210,7 @@ DEGAnalysis_DESeq2 <-
             quote = FALSE,
             sep = '\t'
         )
-        cat('差异基因分析结果见以下目录:\n')
+        cat('The results of differential gene analysis are shown in the following directory:\n')
         cat(paste0(outdir, '/', control, '.vs.', treat, '.AllGene.tsv'),
             '\n')
         cat(paste0(outdir, '/', control, '.vs.', treat, '.DEG.tsv'),
@@ -256,17 +256,17 @@ DEGAnalysis_EBSeq <-
         group = cbind(sample = allgroups, group = allgroups) %>% as.data.frame()
 
         while (!(control %in% allgroups)) {
-            cat('可用样本名：', paste(allgroups), '\n')
-            control <- readline(prompt = "输入对照样本名称: ")
+            cat('Available sample names：', paste(allgroups), '\n')
+            control <- readline(prompt = "Enter the name of the control sample: ")
         }
         allgroups = allgroups[!(allgroups %in% control)]
         if (length(allgroups) == 1) {
             treat = allgroups[1]
-            cat('实验样本名称（自动选择）：', treat, '\n')
+            cat('Experimental sample name（Automatic selection）：', treat, '\n')
         } else{
             while (!(treat %in% allgroups)) {
-                cat('可用样本名：', paste(allgroups), '\n')
-                treat <- readline(prompt = "输入实验样本名称: ")
+                cat('Available sample names：', paste(allgroups), '\n')
+                treat <- readline(prompt = "Enter the name of the experimental sample: ")
             }
         }
         meta.data = group %>% filter(group %in% c(control, treat))
@@ -322,7 +322,7 @@ DEGAnalysis_EBSeq <-
             quote = FALSE,
             sep = '\t'
         )
-        cat('差异基因分析结果见以下目录:\n')
+        cat('The results of differential gene analysis are shown in the following directory:\n')
         cat(paste0(outdir, '/', control, '.vs.', treat, '.AllGene.tsv'),
             '\n')
         cat(paste0(outdir, '/', control, '.vs.', treat, '.DEG.tsv'),
@@ -340,9 +340,9 @@ checkParams = function(value, candidate, string) {
         stop(call. = F,
             '\n',
             string,
-            '参数错误！\n可输入的值为:',
+            'Parameter error！\The values ​​that can be entered are:',
             toString(candidate),
-            '\n而您的输入是:',
+            '\n and your input is:',
             paste(value,collapse = ','),
             '\n'
         )
@@ -354,9 +354,9 @@ checkGroup = function(matrix, group) {
     samples2 = group[, 1]
     if (all(samples != samples2)) {
         stop(
-            '\nCount矩阵中定义的样本名与Group文件中定义的样本名不对应！\n矩阵样本名为:',
+            '\nCountThe sample names defined in the matrix do not correspond to the sample names defined in the Group file! \nThe matrix sample names are:',
             toString(samples),
-            '\n而Group文件的样本名为:',
+            '\nThe sample name of the Group file is:',
             toString(samples2),
             '\n'
         )
