@@ -156,7 +156,7 @@ DEGAnalysis_DESeq2 <-
         allgroups = allgroups[!(allgroups %in% control)]
         if (length(allgroups) == 1) {
             treat = allgroups[1]
-            cat('Experimental group name（Automatic）：', treat, '\n')
+            cat('Experimental group name（Automatic：', treat, '\n')
         } else{
             while (!(treat %in% allgroups)) {
                 cat('Available Group Names：', paste(allgroups), '\n')
@@ -262,7 +262,7 @@ DEGAnalysis_EBSeq <-
         allgroups = allgroups[!(allgroups %in% control)]
         if (length(allgroups) == 1) {
             treat = allgroups[1]
-            cat('Experimental sample name（Automatic selection）：', treat, '\n')
+            cat('Experimental sample name（Automatic selection：', treat, '\n')
         } else{
             while (!(treat %in% allgroups)) {
                 cat('Available sample names：', paste(allgroups), '\n')
@@ -340,7 +340,7 @@ checkParams = function(value, candidate, string) {
         stop(call. = F,
             '\n',
             string,
-            'Parameter error！\The values ​​that can be entered are:',
+            'Parameter error！The values ​​that can be entered are:',
             toString(candidate),
             '\n and your input is:',
             paste(value,collapse = ','),
