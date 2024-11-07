@@ -169,7 +169,7 @@ VolcanoPlot(allgenes, useFDR = T, cut = 0.05, FCcut = 2, MainTitle = "Volcano Pl
             showlabel = "topPvalue", showlabel.num = 10, xlim = 10)
 ```
 
-![](/Users/rfitak/Desktop/volcano.png)
+![volcano plot](./volcano.png)
 
 ####      4.2 MA Plot
 
@@ -178,7 +178,7 @@ MAPlot(allgenes, useFDR = T, cut = 0.05, FCcut = 2, MainTitle = "MA Plot",
        showlabel = "topFC", showlabel.num = 10, ylim = 10)
 ```
 
-![](/Users/rfitak/Desktop/MA.png)
+![MA plot](./MA.png)
 
 ### 5. GO Enrichment Analysis
 
@@ -268,7 +268,7 @@ GObubble(dataset = GOresult, onlySig = T, useFDR = F, cut = 0.05, top = 10,
          TrimTerm = F, TermWidth = 50, MainTitle = "GO plot", ColorScheme = "rw", ColorReverse = F)
 ```
 
-![](/Users/rfitak/Desktop/GO1.png)
+![GObubble plot](./GO1.png)
 
 | Option       | Explanation                                                  | Possible Values                                              |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -291,4 +291,4 @@ Draw a bar chart of all genes and differentially expressed genes for all seconda
 GOBar(deg, pannzer2 = panz)
 ```
 
-![](/Users/rfitak/Desktop/GO2.png)
+![GO Bar plot](./GO2.png)
