@@ -6,6 +6,9 @@
 
 ## Tutorial
 
+[Current Tutorial](./tutorial.md)
+
+Old Tutorial:
 [https://blog.ugeneyun.cn/software/PlantNGSTools.manual.html](https://blog.ugeneyun.cn/software/PlantNGSTools.manual.html)
 
 
